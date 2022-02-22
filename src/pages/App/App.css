@@ -24,6 +24,10 @@
   color: white;
 }
 
+.App-header > .App-image {
+  max-height: 1vh;
+}
+
 .App-link {
   color: #61dafb;
 }
