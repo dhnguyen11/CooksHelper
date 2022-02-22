@@ -12,7 +12,9 @@ export default function PageHeader({ user, handleLogout }) {
                             ? user.photoUrl
                             : "https://react.semantic-ui.com/images/wireframe/square-image.png"
                     }
-                    avatar></Image>
+                    avatar
+                    size="medium"
+                    ></Image>
             </Header>
             <Header as="h2" floated="right">
                 <Link to="/">
