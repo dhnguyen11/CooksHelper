@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Header from "../../components/Header/Header";
+import PageHeader from "../../components/PageHeader/PageHeader";
 // import {create, getAll} from '../../utils/postApi'
 import { Grid } from "semantic-ui-react";
 import HomeSelect from "../../components/HomeSelect/HomeSelect"
@@ -9,7 +9,7 @@ export default function HomePage({ user, handleLogout }) {
         <Grid centered>
             <Grid.Row>
                 <Grid.Column>
-                    <Header user={user} handleLogout={handleLogout} />
+                    <PageHeader user={user} handleLogout={handleLogout} />
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>

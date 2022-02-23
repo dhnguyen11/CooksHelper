@@ -40,3 +40,8 @@
     transform: rotate(360deg);
   }
 }
+
+label {
+  font-size: 3vh;
+  margin-right: 10px;
+}
