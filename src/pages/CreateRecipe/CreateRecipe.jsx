@@ -4,9 +4,11 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import { Header, Grid, Form, Segment, Button } from "semantic-ui-react";
 
 export default function CreateRecipe({ user, handleLogout }) {
-    const [name, setName] = useState("");
-    const [ingredients, setIngredients] = useState([""]);
-    const [instructions, setInstructions] = useState([""]);
+    const [state, setState] = useState({
+        name: "",
+        ingredients: [""],
+        instructions: [""]
+    });
 
     async function handleSubmit(e) {
 
@@ -14,18 +16,48 @@ export default function CreateRecipe({ user, handleLogout }) {
 
     function handleChange(e) {
         e.preventDefault()
-        setName(e.target.value)
+        if (["ingredient"].includes(e.target.name)) {
+            let newIngredients = [...state.ingredients];
+            let loc = parseInt(e.target.id)
+            newIngredients[loc] = e.target.value;
+            setState({
+                ...state,
+                ingredients: newIngredients
+            })
+        }
+        else if (["instruction"].includes(e.target.name)) {
+            let newInstructions = [...state.instructions];
+            let loc = parseInt(e.target.id)
+            newInstructions[loc] = e.target.value;
+            setState({
+                ...state,
+                instructions: newInstructions
+            })
+        }
+        else {
+            setState({
+                ...state,
+                [e.target.name]: e.target.value
+            })
+        }
     }
 
     function addIngredient(e) {
         e.preventDefault()
-        setIngredients([...ingredients, ""]);
+        setState({
+            ...state,
+            ingredients: [...state.ingredients, ""]
+        })
     }
 
     function addInstruction(e) {
         e.preventDefault()
-        setInstructions([...instructions, ""]);
+        setState({
+            ...state,
+            instructions: [...state.instructions, ""]
+        })
     }
+    
 
     return (
         <Grid textAlign="center" verticalAlign="middle">
@@ -39,31 +71,34 @@ export default function CreateRecipe({ user, handleLogout }) {
             </Grid.Row>
             <Grid.Row style={{ maxWidth: 450 }}>
                 <Grid.Column>
-                    <Form autocomplete="off" onSubmit={handleSubmit}>
+                    <Form autoComplete="off" onSubmit={handleSubmit}>
                         <Segment stacked>
                             <Grid centered>
                                 <Grid.Row>
                                     <Form.Input
                                         name="name"
                                         placeholder="name"
-                                        value={name}
+                                        value={state.name}
                                         onChange={handleChange}
                                         required
                                     />
                                 </Grid.Row>
 
-                                <Header as="h2" floated="center">Ingredients</Header>
+                                <Header as="h2">Ingredients</Header>
                                 {
-                                    ingredients.map((ingredient, idx) => {
-                                        let ingredientId = `${ingredient}=${idx}`
+                                    state.ingredients.map((ingredient, idx) => {
+                                        let ingredientId = `${idx}`
                                         return (
                                             <Grid.Row>
                                                 <Form.Input
                                                     type="text"
-                                                    name={ingredient}
+                                                    name="ingredient"
                                                     data-id={idx}
                                                     id={ingredientId}
                                                     placeholder="ingredient"
+                                                    className="ingredient"
+                                                    value={ingredient}
+                                                    onChange={handleChange}
                                                 />
                                             </Grid.Row>
                                         )
@@ -72,18 +107,21 @@ export default function CreateRecipe({ user, handleLogout }) {
                                 <Grid.Row>
                                     <Button onClick={addIngredient} className="btn">Add Ingredient</Button>
                                 </Grid.Row>
-                                <Header as="h2" floated="center">Instructions</Header>
+                                <Header as="h2">Instructions</Header>
                                 {
-                                    instructions.map((instruction, idx) => {
-                                        let instructionId = `${instruction}=${idx}`
+                                    state.instructions.map((instruction, idx) => {
+                                        let instructionId = `${idx}`
                                         return (
                                             <Grid.Row>
                                                 <Form.Input
                                                     type="text"
-                                                    name={instruction}
+                                                    name="instruction"
                                                     data-id={idx}
                                                     id={instructionId}
                                                     placeholder="instruction"
+                                                    className="instruction"
+                                                    value={instruction}
+                                                    onChange={handleChange}
                                                 />
                                             </Grid.Row>
                                         )
