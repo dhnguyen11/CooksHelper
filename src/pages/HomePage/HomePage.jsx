@@ -6,10 +6,20 @@ import HomeSelect from "../../components/HomeSelect/HomeSelect"
 
 export default function HomePage({ user, handleLogout }) {
     return (
-        <>
-            <Header user={user} handleLogout={handleLogout} />
-            <h1>This is the HomePage</h1>
-            <HomeSelect />
-        </>
+        <Grid centered>
+            <Grid.Row>
+                <Grid.Column>
+                    <Header user={user} handleLogout={handleLogout} />
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+                <h1>This is the HomePage</h1>
+            </Grid.Row>
+            <Grid.Row>
+                <Grid.Column style={{maxWidth: 1250}}>
+                    <HomeSelect />
+                </Grid.Column>
+            </Grid.Row>
+        </Grid>
     )
 }
