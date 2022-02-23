@@ -6,5 +6,11 @@ const favoriteSchema = mongoose.Schema({
 })
 
 const recipeSchema = mongoose.Schema({
-    
+    creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    name: String,
+    ingredients: [String],
+    instructions: [String],
+    favorites: [favoriteSchema] // <- 1:M relationship with favorites
 })
+
+module.exports = mongoose.model('Recipe', recipeSchema)
