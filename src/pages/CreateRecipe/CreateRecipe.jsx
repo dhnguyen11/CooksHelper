@@ -3,8 +3,11 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 // import {create, getAll} from '../../utils/postApi'
 import { Header, Grid, Form, Segment, Button } from "semantic-ui-react";
 import * as recipeAPI from "../../utils/recipeApi"
+import { useNavigate } from "react-router-dom"
 
 export default function CreateRecipe({ user, handleLogout }) {
+    const navigate = useNavigate();
+
     const [state, setState] = useState({
         name: "",
         ingredients: [""],
@@ -13,11 +16,30 @@ export default function CreateRecipe({ user, handleLogout }) {
 
     async function handleSubmit(e) {
         const data = await recipeAPI.create(state);
-        console.log(data)
+        navigate("/")
     }
 
     function handleEnter(e) {
-        console.log(e.charCode, e.target.name)
+        if (e.charCode === 13) {
+            e.preventDefault();
+            switch(e.target.name) {
+                case 'ingredient': 
+                    addIngredient(e);
+                    break;
+                case 'ing-btn':
+                    addIngredient(e)
+                    break;
+                case 'instruction':
+                    addInstruction(e)
+                    break;
+                case 'inst-btn':
+                    addInstruction(e)
+                    break;
+                case 'sub-btn':
+                    handleSubmit(e)
+                    break;
+            }
+        }
     }
 
     function handleChange(e) {
@@ -63,7 +85,7 @@ export default function CreateRecipe({ user, handleLogout }) {
             instructions: [...state.instructions, ""]
         })
     }
-    
+
 
     return (
         <Grid textAlign="center" verticalAlign="middle">
@@ -77,7 +99,7 @@ export default function CreateRecipe({ user, handleLogout }) {
             </Grid.Row>
             <Grid.Row style={{ maxWidth: 450 }}>
                 <Grid.Column>
-                    <Form autoComplete="off" onKeyPress={handleEnter} onSubmit={handleSubmit}>
+                    <Form autoComplete="off" onSubmit={handleSubmit}>
                         <Segment stacked>
                             <Grid centered>
                                 <Grid.Row>
@@ -86,6 +108,7 @@ export default function CreateRecipe({ user, handleLogout }) {
                                         placeholder="name"
                                         value={state.name}
                                         onChange={handleChange}
+                                        onKeyPress={handleEnter}
                                         required
                                     />
                                 </Grid.Row>
@@ -105,13 +128,21 @@ export default function CreateRecipe({ user, handleLogout }) {
                                                     className="ingredient"
                                                     value={ingredient}
                                                     onChange={handleChange}
+                                                    onKeyPress={handleEnter}
                                                 />
                                             </Grid.Row>
                                         )
                                     })
                                 }
                                 <Grid.Row>
-                                    <Button onClick={addIngredient} className="btn">Add Ingredient</Button>
+                                    <Button 
+                                        onClick={addIngredient} 
+                                        onKeyPress={handleEnter} 
+                                        name="ing-btn" 
+                                        className="btn"
+                                    >
+                                        Add Ingredient
+                                    </Button>
                                 </Grid.Row>
                                 <Header as="h2">Instructions</Header>
                                 {
@@ -128,17 +159,30 @@ export default function CreateRecipe({ user, handleLogout }) {
                                                     className="instruction"
                                                     value={instruction}
                                                     onChange={handleChange}
+                                                    onKeyPress={handleEnter}
                                                 />
                                             </Grid.Row>
                                         )
                                     })
                                 }
                                 <Grid.Row>
-                                    <Button onClick={addInstruction} className="btn">Add Instruction</Button>
+                                    <Button 
+                                        onClick={addInstruction} 
+                                        className="btn"
+                                        name="inst-btn"
+                                        onKeyPress={handleEnter}
+                                    >
+                                        Add Instruction
+                                    </Button>
                                 </Grid.Row>
                                 <Grid.Row>
-                                    <Button type="submit" className="btn">
-                                        Create Recipe
+                                    <Button 
+                                        type="submit" 
+                                        className="btn" 
+                                        onKeyPress={handleEnter}
+                                        name="sub-btn"
+                                    >
+                                    Create Recipe
                                     </Button>
                                 </Grid.Row>
                             </Grid>

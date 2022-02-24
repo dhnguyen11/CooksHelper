@@ -3,7 +3,6 @@ import tokenService from "./tokenService"
 const BASE_URL = '/api/recipes'
 
 export function create(recipeInfo) {
-    console.log(recipeInfo, '<- recipeinfo')
     return fetch(BASE_URL, {
         method: 'POST',
         body: JSON.stringify(recipeInfo),

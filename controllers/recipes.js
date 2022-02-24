@@ -1,5 +1,4 @@
 const Recipe = require('../models/recipe');
-const { post } = require('../routes/api/recipes');
 
 module.exports = {
     create,
@@ -7,7 +6,6 @@ module.exports = {
 }
 
 async function create(req, res) {
-    console.log(req.body, '<- req.body')
     try {
         let recipe = await Recipe.create({
             user: req.user,
@@ -15,7 +13,6 @@ async function create(req, res) {
             ingredients: req.body.ingredients,
             instructions: req.body.instructions
         })
-        console.log(recipe)
         recipe = await recipe.populate('user')
         res.status(201).json({recipe})
     } catch (err) {
