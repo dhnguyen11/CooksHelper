@@ -11,7 +11,7 @@ export default function CreateRecipe({ user, handleLogout }) {
     });
 
     async function handleSubmit(e) {
-
+        e.preventDefault();
     }
 
     function handleChange(e) {
