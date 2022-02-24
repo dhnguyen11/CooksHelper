@@ -99,7 +99,7 @@ export default function CreateRecipe({ user, handleLogout }) {
             </Grid.Row>
             <Grid.Row style={{ maxWidth: 450 }}>
                 <Grid.Column>
-                    <Form autoComplete="off" onSubmit={handleSubmit}>
+                    <Form autoComplete="off" onKeyPress={handleEnter} onSubmit={handleSubmit}>
                         <Segment stacked>
                             <Grid centered>
                                 <Grid.Row>
@@ -108,7 +108,6 @@ export default function CreateRecipe({ user, handleLogout }) {
                                         placeholder="name"
                                         value={state.name}
                                         onChange={handleChange}
-                                        onKeyPress={handleEnter}
                                         required
                                     />
                                 </Grid.Row>
@@ -128,7 +127,6 @@ export default function CreateRecipe({ user, handleLogout }) {
                                                     className="ingredient"
                                                     value={ingredient}
                                                     onChange={handleChange}
-                                                    onKeyPress={handleEnter}
                                                 />
                                             </Grid.Row>
                                         )
@@ -137,7 +135,6 @@ export default function CreateRecipe({ user, handleLogout }) {
                                 <Grid.Row>
                                     <Button 
                                         onClick={addIngredient} 
-                                        onKeyPress={handleEnter} 
                                         name="ing-btn" 
                                         className="btn"
                                     >
@@ -159,7 +156,6 @@ export default function CreateRecipe({ user, handleLogout }) {
                                                     className="instruction"
                                                     value={instruction}
                                                     onChange={handleChange}
-                                                    onKeyPress={handleEnter}
                                                 />
                                             </Grid.Row>
                                         )
@@ -170,7 +166,6 @@ export default function CreateRecipe({ user, handleLogout }) {
                                         onClick={addInstruction} 
                                         className="btn"
                                         name="inst-btn"
-                                        onKeyPress={handleEnter}
                                     >
                                         Add Instruction
                                     </Button>
@@ -179,7 +174,6 @@ export default function CreateRecipe({ user, handleLogout }) {
                                     <Button 
                                         type="submit" 
                                         className="btn" 
-                                        onKeyPress={handleEnter}
                                         name="sub-btn"
                                     >
                                     Create Recipe
