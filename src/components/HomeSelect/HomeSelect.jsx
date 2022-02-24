@@ -12,7 +12,7 @@ export default function HomeSelect() {
                 </Link>
             </Card>
             <Card>
-                <Link to="/">
+                <Link to="/cookbook">
                     <Icon size="large" name="book"></Icon>
                     View My Cookbook
                 </Link>

@@ -2,7 +2,8 @@ const Recipe = require('../models/recipe');
 
 module.exports = {
     create,
-    deleteRecipe
+    deleteRecipe,
+    index
 }
 
 async function create(req, res) {
@@ -25,6 +26,15 @@ async function deleteRecipe(req, res) {
     try {
         await Recipe.deleteOne({_id: req.params.id});
         res.json({data: 'recipe removed'});
+    } catch (err) {
+        res.status(400).json({err})
+    }
+}
+
+async function index(req, res) {
+    try {
+        const recipes = await Recipe.find({}).populate("user").exec();
+        res.status(200).json({ recipes: recipes});
     } catch (err) {
         res.status(400).json({err})
     }

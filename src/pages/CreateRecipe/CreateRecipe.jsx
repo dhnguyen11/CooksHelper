@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PageHeader from "../../components/PageHeader/PageHeader";
 // import {create, getAll} from '../../utils/postApi'
 import { Header, Grid, Form, Segment, Button } from "semantic-ui-react";
