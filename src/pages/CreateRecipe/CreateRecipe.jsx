@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageHeader from "../../components/PageHeader/PageHeader";
 // import {create, getAll} from '../../utils/postApi'
 import { Header, Grid, Form, Segment, Button } from "semantic-ui-react";
+import * as recipeAPI from "../../utils/recipeApi"
 
 export default function CreateRecipe({ user, handleLogout }) {
     const [state, setState] = useState({
@@ -11,7 +12,12 @@ export default function CreateRecipe({ user, handleLogout }) {
     });
 
     async function handleSubmit(e) {
-        e.preventDefault();
+        const data = await recipeAPI.create(state);
+        console.log(data)
+    }
+
+    function handleEnter(e) {
+        console.log(e.charCode, e.target.name)
     }
 
     function handleChange(e) {
@@ -71,7 +77,7 @@ export default function CreateRecipe({ user, handleLogout }) {
             </Grid.Row>
             <Grid.Row style={{ maxWidth: 450 }}>
                 <Grid.Column>
-                    <Form autoComplete="off" onSubmit={handleSubmit}>
+                    <Form autoComplete="off" onKeyPress={handleEnter} onSubmit={handleSubmit}>
                         <Segment stacked>
                             <Grid centered>
                                 <Grid.Row>
@@ -89,7 +95,7 @@ export default function CreateRecipe({ user, handleLogout }) {
                                     state.ingredients.map((ingredient, idx) => {
                                         let ingredientId = `${idx}`
                                         return (
-                                            <Grid.Row>
+                                            <Grid.Row key={idx}>
                                                 <Form.Input
                                                     type="text"
                                                     name="ingredient"
@@ -112,7 +118,7 @@ export default function CreateRecipe({ user, handleLogout }) {
                                     state.instructions.map((instruction, idx) => {
                                         let instructionId = `${idx}`
                                         return (
-                                            <Grid.Row>
+                                            <Grid.Row key={idx}>
                                                 <Form.Input
                                                     type="text"
                                                     name="instruction"
