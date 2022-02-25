@@ -17,7 +17,8 @@ export function create(recipeId){
 
 // Function to remove a like
 export function removeFavorite(favoriteId){
-    return fetch(`${BASE_URL}/recipes/${favoriteId}`, {
+    console.log(favoriteId)
+    return fetch(`${BASE_URL}/favorites/${favoriteId}`, {
         method: 'DELETE',
         headers: {
             'Authorization': 'Bearer ' + tokenService.getToken()

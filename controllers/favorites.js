@@ -17,11 +17,13 @@ async function create(req, res){
 }
 
 async function deleteFavorite(req, res){
+    console.log(req.params)
     try{
         const recipe = await Recipe.findOne({'favorites._id': req.params.id, 'favorites.username': req.user.username});
         recipe.favorites.remove(req.params.id);
+        console.log(recipe)
         await recipe.save();
-        res.json({data: 'favorite removed'});
+        res.status(202).json({data: 'favorite removed'});
     }catch(err){
         res.status(400).json({err})
     }

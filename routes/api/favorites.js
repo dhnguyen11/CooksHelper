@@ -4,7 +4,7 @@ const favoritesCtrl = require('../../controllers/favorites');
 
 //----------- Public Routes -----------//
 router.post('/recipes/:id/favorites', favoritesCtrl.create)
-router.delete('/recipes/:id', favoritesCtrl.deleteFavorite)
+router.delete('/favorites/:id', favoritesCtrl.deleteFavorite)
 
 
 module.exports = router;

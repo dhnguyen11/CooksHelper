@@ -28,13 +28,13 @@ export default function RecipeDetails({ user, handleLogout }){
     async function getRecipe() {
         try {
             const data = await recipeAPI.getOne(recipeId);
-            setLoading(() => false);
             setRecipe(data.recipe);
             setIngredients(data.recipe.ingredients);
             setInstructions(data.recipe.instructions);
             if (data.recipe.user.username === user.username) {
                 setIsOwner(true);
             }
+            setLoading(false);
         } catch(err) {
             setLoading(() => false);
             setError("Recipe does not exist");
@@ -42,6 +42,7 @@ export default function RecipeDetails({ user, handleLogout }){
     }
 
     async function addFavorite(recipeId) {
+        console.log(recipeId, "recipeId")
         try {
             const data = await favoriteAPI.create(recipeId)
             getRecipe();
@@ -52,6 +53,7 @@ export default function RecipeDetails({ user, handleLogout }){
     }
 
     async function deleteFavorite(favoriteId) {
+        console.log(favoriteId, "favoriteID")
         try {
             const data = await favoriteAPI.removeFavorite(favoriteId);
             getRecipe();
@@ -105,7 +107,7 @@ export default function RecipeDetails({ user, handleLogout }){
                 }
                 <Grid.Column width={10}></Grid.Column>
                 <Grid.Column floated="right" width={2}>
-                    {/* <FavoriteComponent user={user} recipe={recipe} addFavorite={addFavorite} deleteFavorite={deleteFavorite} /> */}
+                    <FavoriteComponent user={user} recipe={recipe} addFavorite={addFavorite} deleteFavorite={deleteFavorite} />
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
