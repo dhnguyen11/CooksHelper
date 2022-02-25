@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import PageHeader from "../../components/PageHeader/PageHeader";
 // import {create, getAll} from '../../utils/postApi'
 import { Grid } from "semantic-ui-react";
-import { useNavigate } from "react-router-dom"
 import * as recipeAPI from "../../utils/recipeApi"
 import RecipeList from "../../components/RecipeList/RecipeList"
 
 export default function MyCookbook ({ user, handleLogout }) {
-    const navigate = useNavigate();
     const [recipes, setRecipes] = useState([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true)
@@ -15,7 +13,7 @@ export default function MyCookbook ({ user, handleLogout }) {
     // Function to actually get the recipes from the database
     async function getRecipes() {
         try {
-            const data = await recipeAPI.getAll();
+            const data = await recipeAPI.getFavorites();
             setLoading(() => false);
             setRecipes([...data.recipes]);
         } catch (err) {

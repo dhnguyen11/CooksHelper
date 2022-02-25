@@ -3,6 +3,7 @@ import { Icon } from "semantic-ui-react"
 
 export default function FavoriteComponent( { user, recipe, addFavorite, deleteFavorite } ) {
     // Determine if the user liked the post
+    console.log(recipe)
     const favoriteIndex = recipe.favorites.findIndex(favorite => favorite.username === user.username)
     // Set the favorite color
     const favoriteColor = favoriteIndex > -1 ? 'red' : 'grey';

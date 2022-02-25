@@ -79,7 +79,7 @@ export default function SignUpPage(props) {
       <Grid textAlign='center' verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450}}>
           <Header as="h2" color="black" textAlign="center">Sign Up For An Account</Header>
-          <Form autocomplete="off" onSubmit={handleSubmit}>
+          <Form autoComplete="off" onSubmit={handleSubmit}>
             <Segment stacked>
               <Form.Input
                 type="username"

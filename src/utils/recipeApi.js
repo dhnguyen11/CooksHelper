@@ -19,6 +19,18 @@ export function create(recipeInfo) {
     })
 }
 
+export function deleteOne(recipeId) {
+    return fetch(`${BASE_URL}${recipeId}`, {
+		method: 'DELETE',
+	    headers: {
+			'Authorization': 'Bearer ' + tokenService.getToken() // <- the jwt contains the user who is sending the like
+		}	
+	}).then(res => {
+		if(res.ok) return res.json();
+		throw new Error('Error in deleting the like, check your express terminal!')
+	})
+}
+
 // Authorization path for getting all recipes
 export function getAll() {
     // Fetch function
@@ -45,6 +57,24 @@ export function getOne(recipeId) {
             'Authorization': 'Bearer ' + tokenService.getToken()
         }
     }).then(res=> {
+        // If valid (return code 2xx) return
+        // Otherwise throw an error
+        if (res.ok) return res.json();
+        throw new Error('bad credentials');
+    })
+}
+
+export function getFavorites(userId) {
+    // Fetch function
+    // Since it is a search and not a write, we only need the method and authorization
+    // However, because we are specifically searching for the Favorites
+    // It requires a different route
+    return fetch(BASE_URL + 'favorites', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        }
+    }).then(res => {
         // If valid (return code 2xx) return
         // Otherwise throw an error
         if (res.ok) return res.json();

@@ -4,7 +4,8 @@ module.exports = {
     create,
     deleteRecipe,
     index,
-    getOne
+    getOne,
+    getFavorites
 }
 
 // Function to create a recipe
@@ -34,7 +35,7 @@ async function create(req, res) {
 async function deleteRecipe(req, res) {
     try {
         // Searches for and deletes the recipe from the database
-        await Recipe.deleteOne({_id: req.params.id});
+        await Recipe.deleteOne({_id: req.params.recipeId});
         res.json({data: 'recipe removed'});
     } catch (err) {
         // If there is an error
@@ -70,6 +71,17 @@ async function getOne(req, res) {
     } catch(err){
         // If there is an error
         // Log out the error and return status 400
+        console.log(err)
+        res.status(400).json({err})
+    }
+}
+
+async function getFavorites(req, res) {
+    try {
+        const recipes = await Recipe.find({}).populate("user").exec();
+        const favorites = recipes.filter(recipe => recipe.favorites.filter(favorite => favorite.username === req.user.username))
+        res.status(200).json({ recipes: favorites});
+    }catch(err){
         console.log(err)
         res.status(400).json({err})
     }

@@ -51,7 +51,7 @@ export default function LoginPage(props) {
       <Grid textAlign='center' verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450}}>
           <Header as="h2" color="black" textAlign="center">Log In to Your Account</Header>
-          <Form autocomplete="off" onSubmit={handleSubmit}>
+          <Form autoComplete="off" onSubmit={handleSubmit}>
             <Segment stacked>
               <Form.Input
                 type="email"

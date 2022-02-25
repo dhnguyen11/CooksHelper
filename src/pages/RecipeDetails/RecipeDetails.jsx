@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
 import PageHeader from "../../components/PageHeader/PageHeader";
-import { Grid, Icon } from "semantic-ui-react";
+import { Grid, Button } from "semantic-ui-react";
 import { useParams } from "react-router-dom";
-import * as recipeAPI from "../../utils/recipeApi"
-import * as favoriteAPI from "../../utils/favoriteApi"
+import * as recipeAPI from "../../utils/recipeApi";
+import * as favoriteAPI from "../../utils/favoriteApi";
 import FavoriteComponent from "../../components/FavoriteComponent/FavoriteComponent";
+import { useNavigate } from "react-router-dom";
 
 
 export default function RecipeDetails({ user, handleLogout }){
@@ -13,6 +14,8 @@ export default function RecipeDetails({ user, handleLogout }){
     const [error, setError] = useState("");
     const [ingredients, setIngredients] = useState([]);
     const [instructions, setInstructions] = useState([]);
+    const [isOwner, setIsOwner] = useState(false)
+    const navigate = useNavigate();
     let idx = 0;
     
     // Grabbing the param from the browser
@@ -27,9 +30,11 @@ export default function RecipeDetails({ user, handleLogout }){
             const data = await recipeAPI.getOne(recipeId);
             setLoading(() => false);
             setRecipe(data.recipe);
-            console.log(data.recipe)
             setIngredients(data.recipe.ingredients);
             setInstructions(data.recipe.instructions);
+            if (data.recipe.user.username === user.username) {
+                setIsOwner(true);
+            }
         } catch(err) {
             setLoading(() => false);
             setError("Recipe does not exist");
@@ -53,6 +58,16 @@ export default function RecipeDetails({ user, handleLogout }){
         }catch(err){
             console.log(err.message);
             setError(err.message);
+        }
+    }
+
+    async function deleteRecipe() {
+        try {
+            const data = await recipeAPI.deleteOne(recipe._id)
+            navigate("/")
+        } catch(err){
+            console.log(err.message);
+            setError(err.message)
         }
     }
 
@@ -83,9 +98,14 @@ export default function RecipeDetails({ user, handleLogout }){
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
+                <Grid.Column floated="left" width={1}></Grid.Column>
+                {isOwner 
+                    ? <Grid.Column floated="left" width={2} onClick={deleteRecipe}><Button>Delete</Button></Grid.Column>
+                    : <Grid.Column floated="left" width={2}></Grid.Column>
+                }
                 <Grid.Column width={10}></Grid.Column>
                 <Grid.Column floated="right" width={2}>
-                    <FavoriteComponent user={user} recipe={recipe} addFavorite={addFavorite} deleteFavorite={deleteFavorite} />
+                    {/* <FavoriteComponent user={user} recipe={recipe} addFavorite={addFavorite} deleteFavorite={deleteFavorite} /> */}
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
