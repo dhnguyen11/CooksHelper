@@ -5,6 +5,10 @@ import SignupPage from "../SignupPage/SignupPage";
 import LoginPage from "../LoginPage/LoginPage";
 import HomePage from "../HomePage/HomePage";
 import userService from "../../utils/userService";
+import CreateRecipe from "../CreateRecipe/CreateRecipe"
+import MyCookbook from "../MyCookbook/MyCookbook"
+import SearchRecipes from "../SearchRecipes/SearchRecipes"
+import RecipeDetails from "../RecipeDetails/RecipeDetails"
 
 function App() {
   const [user, setUser] = useState(userService.getUser()); // getUser decodes our JWT token, into a javascript object
@@ -31,6 +35,22 @@ function App() {
         <Route
           path="/signup"
           element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+        />
+        <Route
+          path="/new"
+          element={<CreateRecipe user={user} handleLogout={handleLogout}/>}
+        />
+        <Route
+          path="/recipes"
+          element={<MyCookbook user={user} handleLogout={handleLogout} />}
+        />
+        <Route
+          path="/search"
+          element={<SearchRecipes user={user} handleLogout={handleLogout} />}
+        />
+        <Route
+          path="/recipes/:recipeId" 
+          element={<RecipeDetails user={user} handleLogout={handleLogout} />}
         />
       </Routes>
     );

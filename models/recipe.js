@@ -6,7 +6,7 @@ const favoriteSchema = mongoose.Schema({
 })
 
 const recipeSchema = mongoose.Schema({
-    creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     name: String,
     ingredients: [String],
     instructions: [String],
