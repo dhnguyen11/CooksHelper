@@ -7,6 +7,7 @@ import HomePage from "../HomePage/HomePage";
 import userService from "../../utils/userService";
 import CreateRecipe from "../CreateRecipe/CreateRecipe"
 import MyCookbook from "../MyCookbook/MyCookbook"
+import SearchRecipes from "../SearchRecipes/SearchRecipes"
 
 function App() {
   const [user, setUser] = useState(userService.getUser()); // getUser decodes our JWT token, into a javascript object
@@ -41,6 +42,10 @@ function App() {
         <Route
           path="/cookbook"
           element={<MyCookbook user={user} handleLogout={handleLogout} />}
+        />
+        <Route
+          path="/search"
+          element={<SearchRecipes user={user} handleLogout={handleLogout} />}
         />
       </Routes>
     );

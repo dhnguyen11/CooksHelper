@@ -18,7 +18,7 @@ export default function HomeSelect() {
                 </Link>
             </Card>
             <Card>
-                <Link to="/">
+                <Link to="/search">
                     <Icon size="large" name="search"></Icon>
                     Search Recipes
                 </Link>

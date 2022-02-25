@@ -1,22 +1,40 @@
 import React, { useState, useEffect } from "react";
 import PageHeader from "../../components/PageHeader/PageHeader";
 // import {create, getAll} from '../../utils/postApi'
-import { Grid } from "semantic-ui-react";
+import { Grid, Form } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom"
 import * as recipeAPI from "../../utils/recipeApi"
 import RecipeList from "../../components/RecipeList/RecipeList"
 
-export default function MyCookbook ({ user, handleLogout }) {
+export default function SearchRecipes ({ user, handleLogout }) {
     const navigate = useNavigate();
     const [recipes, setRecipes] = useState([]);
-    const [error, setError] = useState("")
+    const [error, setError] = useState("");
+    const [state, setState] = useState({
+        recipeSet: []
+    });
+
+    function handleChange(e) {
+        e.preventDefault();
+        const lower = e.target.value.toLowerCase()
+        const matches = recipes.filter((recipe) => {
+            return recipe.name.toLowerCase().includes(lower);
+        })
+        setState({
+            recipeSet: matches
+        })
+    }
+
 
     // Function to actually get the recipes from the database
     async function getRecipes() {
         try {
             const data = await recipeAPI.getAll();
-            console.log(data);
             setRecipes([...data.recipes]);
+            setState({
+                ...state,
+                recipeSet: [...data.recipes]
+            })
         } catch (err) {
             console.log(err.message, "<- error message");
             setError(err.message);
@@ -35,10 +53,21 @@ export default function MyCookbook ({ user, handleLogout }) {
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
+                <Grid.Column style={{maxWidth: 1000}}>
+                    <Form>
+                        <Form.Input
+                            name="terms"
+                            placeholder="search"
+                            onChange={handleChange}
+                        />
+                    </Form>
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
                 <Grid.Column style={{maxWidth: 1250}}>
                     <RecipeList 
                         user={ user }
-                        recipes={ recipes }
+                        recipes={ state.recipeSet }
                     />
                 </Grid.Column>
             </Grid.Row>
