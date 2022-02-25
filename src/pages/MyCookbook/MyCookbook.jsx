@@ -15,7 +15,6 @@ export default function MyCookbook ({ user, handleLogout }) {
     async function getRecipes() {
         try {
             const data = await recipeAPI.getAll();
-            console.log(data);
             setRecipes([...data.recipes]);
         } catch (err) {
             console.log(err.message, "<- error message");

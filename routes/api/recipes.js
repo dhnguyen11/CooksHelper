@@ -6,6 +6,7 @@ const recipesCtrl = require('../../controllers/recipes');
 router.post('/', isAuthenticated, recipesCtrl.create)
 router.delete('/', isAuthenticated, recipesCtrl.deleteRecipe)
 router.get('/', recipesCtrl.index)
+router.get('/:recipeId', recipesCtrl.getOne)
 
 
 function isAuthenticated(req, res, next){

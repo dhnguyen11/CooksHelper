@@ -41,7 +41,7 @@ function App() {
           element={<CreateRecipe user={user} handleLogout={handleLogout}/>}
         />
         <Route
-          path="/cookbook"
+          path="/recipes"
           element={<MyCookbook user={user} handleLogout={handleLogout} />}
         />
         <Route
@@ -49,7 +49,7 @@ function App() {
           element={<SearchRecipes user={user} handleLogout={handleLogout} />}
         />
         <Route
-          path="/:recipeId" 
+          path="/recipes/:recipeId" 
           element={<RecipeDetails user={user} handleLogout={handleLogout} />}
         />
       </Routes>
