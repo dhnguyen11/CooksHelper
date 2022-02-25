@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
 import PageHeader from "../../components/PageHeader/PageHeader";
-import { Grid } from "semantic-ui-react";
+import { Grid, Icon } from "semantic-ui-react";
 import { useParams } from "react-router-dom";
 import * as recipeAPI from "../../utils/recipeApi"
-import Ingredient from "../../components/Ingredient/Ingredient"
+import * as favoriteAPI from "../../utils/favoriteApi"
+import FavoriteComponent from "../../components/FavoriteComponent/FavoriteComponent";
+
 
 export default function RecipeDetails({ user, handleLogout }){
     const [recipe, setRecipe] = useState({});
@@ -12,25 +14,49 @@ export default function RecipeDetails({ user, handleLogout }){
     const [ingredients, setIngredients] = useState([]);
     const [instructions, setInstructions] = useState([]);
     let idx = 0;
-
+    
     // Grabbing the param from the browser
     const { recipeId } = useParams();
 
     useEffect(() => {
-        async function getRecipe() {
-            try {
-                const data = await recipeAPI.getOne(recipeId);
-                setLoading(() => false);
-                setRecipe(data.recipe);
-                setIngredients(data.recipe.ingredients);
-                setInstructions(data.recipe.instructions);
-            } catch(err) {
-                setLoading(() => false);
-                setError("Recipe does not exist");
-            }
-        }
         getRecipe();
     }, [recipeId])
+    
+    async function getRecipe() {
+        try {
+            const data = await recipeAPI.getOne(recipeId);
+            setLoading(() => false);
+            setRecipe(data.recipe);
+            console.log(data.recipe)
+            setIngredients(data.recipe.ingredients);
+            setInstructions(data.recipe.instructions);
+        } catch(err) {
+            setLoading(() => false);
+            setError("Recipe does not exist");
+        }
+    }
+
+    async function addFavorite(recipeId) {
+        try {
+            const data = await favoriteAPI.create(recipeId)
+            getRecipe();
+        }catch(err){
+            console.log(err.message);
+            setError(err.message);
+        }
+    }
+
+    async function deleteFavorite(favoriteId) {
+        try {
+            const data = await favoriteAPI.removeFavorite(favoriteId);
+            getRecipe();
+        }catch(err){
+            console.log(err.message);
+            setError(err.message);
+        }
+    }
+
+
     if (loading) {
         return (
             <>
@@ -54,6 +80,12 @@ export default function RecipeDetails({ user, handleLogout }){
             <Grid.Row>
                 <Grid.Column>
                     <PageHeader user={user} handleLogout={handleLogout} />
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+                <Grid.Column width={10}></Grid.Column>
+                <Grid.Column floated="right" width={2}>
+                    <FavoriteComponent user={user} recipe={recipe} addFavorite={addFavorite} deleteFavorite={deleteFavorite} />
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>

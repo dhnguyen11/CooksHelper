@@ -2,17 +2,16 @@ import React, { useState, useEffect } from "react";
 import PageHeader from "../../components/PageHeader/PageHeader";
 // import {create, getAll} from '../../utils/postApi'
 import { Grid, Form } from "semantic-ui-react";
-import { useNavigate } from "react-router-dom"
 import * as recipeAPI from "../../utils/recipeApi"
 import RecipeList from "../../components/RecipeList/RecipeList"
 
 export default function SearchRecipes ({ user, handleLogout }) {
-    const navigate = useNavigate();
     const [recipes, setRecipes] = useState([]);
     const [error, setError] = useState("");
     const [state, setState] = useState({
         recipeSet: []
     });
+    const [loading, setLoading] = useState(true);
 
     function handleChange(e) {
         e.preventDefault();
@@ -30,6 +29,7 @@ export default function SearchRecipes ({ user, handleLogout }) {
     async function getRecipes() {
         try {
             const data = await recipeAPI.getAll();
+            setLoading(() => false);
             setRecipes([...data.recipes]);
             setState({
                 ...state,
@@ -44,6 +44,16 @@ export default function SearchRecipes ({ user, handleLogout }) {
     useEffect(() => {
         getRecipes();
     }, [])
+
+    if(loading) {
+        return (
+            <>
+                <PageHeader user={user} handleLogout={handleLogout} />
+                <h1>Loading...</h1>
+            </>
+        )
+    }
+
     // Returning the page data
     return (
         <Grid textAlign="center" verticalAlign="middle">

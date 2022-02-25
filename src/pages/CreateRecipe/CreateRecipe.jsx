@@ -3,6 +3,7 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 // import {create, getAll} from '../../utils/postApi'
 import { Header, Grid, Form, Segment, Button } from "semantic-ui-react";
 import * as recipeAPI from "../../utils/recipeApi"
+import * as favoriteAPI from "../../utils/favoriteApi"
 import { useNavigate } from "react-router-dom"
 
 export default function CreateRecipe({ user, handleLogout }) {
@@ -16,7 +17,9 @@ export default function CreateRecipe({ user, handleLogout }) {
 
     async function handleSubmit(e) {
         const data = await recipeAPI.create(state);
-        navigate("/")
+        console.log(data)
+        const data2 = await favoriteAPI.create(data.recipe._id)
+        navigate(`/recipes/${data.recipe._id}`)
     }
 
     function handleEnter(e) {

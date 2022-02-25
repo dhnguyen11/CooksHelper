@@ -9,12 +9,14 @@ import RecipeList from "../../components/RecipeList/RecipeList"
 export default function MyCookbook ({ user, handleLogout }) {
     const navigate = useNavigate();
     const [recipes, setRecipes] = useState([]);
-    const [error, setError] = useState("")
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true)
 
     // Function to actually get the recipes from the database
     async function getRecipes() {
         try {
             const data = await recipeAPI.getAll();
+            setLoading(() => false);
             setRecipes([...data.recipes]);
         } catch (err) {
             console.log(err.message, "<- error message");
@@ -26,6 +28,14 @@ export default function MyCookbook ({ user, handleLogout }) {
         getRecipes();
     }, [])
     // Returning the page data
+    if(loading) {
+        return (
+            <>
+                <PageHeader user={user} handleLogout={handleLogout} />
+                <h1>Loading...</h1>
+            </>
+        )
+    }
     return (
         <Grid textAlign="center" verticalAlign="middle">
             <Grid.Row>
