@@ -6,20 +6,20 @@ import "./HomeSelect.css"
 export default function HomeSelect() {
     return (
         <Card.Group centered itemsPerRow={3} stackable>
-            <Card id="home-card-one">
+            <Card id="home-card-one" style={{ minWidth: 300, minHeight: 250}}>
                 <Link to="/new">
                     <Icon size="large" name="write"></Icon>
                     Add a Recipe
                 </Link>
             </Card>
             <Card>
-                <Link to="/recipes">
+                <Link to="/recipes" style={{ minWidth: 300, minHeight: 250}}>
                     <Icon size="large" name="book"></Icon>
                     View My Cookbook
                 </Link>
             </Card>
             <Card>
-                <Link to="/search">
+                <Link to="/search" style={{ minWidth: 300, minHeight: 250}}>
                     <Icon size="large" name="search"></Icon>
                     Search Recipes
                 </Link>

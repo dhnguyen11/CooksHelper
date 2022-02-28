@@ -79,7 +79,15 @@ async function getOne(req, res) {
 async function getFavorites(req, res) {
     try {
         const recipes = await Recipe.find({}).populate("user").exec();
-        const favorites = recipes.filter(recipe => recipe.favorites.filter(favorite => favorite.username === req.user.username))
+        const favorites = recipes.filter((recipe) => {
+            let found = false;
+            recipe.favorites.forEach((favorite) => {
+                if (favorite.username === req.user.username) {
+                    found = true;
+                }
+            })
+            return found;
+        })
         res.status(200).json({ recipes: favorites});
     }catch(err){
         console.log(err)
