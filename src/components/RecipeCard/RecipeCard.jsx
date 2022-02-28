@@ -6,7 +6,7 @@ export default function RecipeCard({ recipe, user }) {
     return (
         <Card key={recipe._id} raised style={{padding: 15}}>
             <Link to={`/recipes/${recipe._id}`}>
-                <Card.Content textAlign="left">
+                <Card.Content textAlign="center">
                     { recipe.name } by { user }
                 </Card.Content>
              </Link>
