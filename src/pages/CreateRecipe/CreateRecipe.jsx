@@ -103,10 +103,11 @@ export default function CreateRecipe({ user, handleLogout }) {
             <Grid.Row style={{ maxWidth: 450 }}>
                 <Grid.Column>
                     <Form autoComplete="off" onKeyPress={handleEnter} onSubmit={handleSubmit}>
-                        <Segment stacked>
+                        <Segment>
                             <Grid centered>
                                 <Grid.Row>
                                     <Form.Input
+                                        style={{ minWidth: 350 }}
                                         name="name"
                                         placeholder="name"
                                         value={state.name}
@@ -122,6 +123,7 @@ export default function CreateRecipe({ user, handleLogout }) {
                                         return (
                                             <Grid.Row key={idx}>
                                                 <Form.Input
+                                                    style={{ minWidth: 350 }}
                                                     type="text"
                                                     name="ingredient"
                                                     data-id={idx}
@@ -150,7 +152,8 @@ export default function CreateRecipe({ user, handleLogout }) {
                                         let instructionId = `${idx}`
                                         return (
                                             <Grid.Row key={idx}>
-                                                <Form.Input
+                                                <Form.TextArea
+                                                    style={{ minWidth: 350 }}
                                                     type="text"
                                                     name="instruction"
                                                     data-id={idx}

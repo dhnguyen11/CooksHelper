@@ -11,6 +11,7 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react";
+import "./LoginPage.css"
 
 export default function LoginPage(props) {
   const [error, setError] = useState("")
@@ -50,10 +51,11 @@ export default function LoginPage(props) {
     <>
       <Grid textAlign='center' verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450}}>
-          <Header as="h2" color="black" textAlign="center">Log In to Your Account</Header>
+          <Header id="main-head" as="h2" color="black" textAlign="center">Log In to Your Account</Header>
           <Form autoComplete="off" onSubmit={handleSubmit}>
-            <Segment stacked>
+            <Segment>
               <Form.Input
+                style={{ minWidth: 350 }}
                 type="email"
                 name="email"
                 placeholder="email"
@@ -62,6 +64,7 @@ export default function LoginPage(props) {
                 required
               />
               <Form.Input
+                style={{ minWidth: 350 }}
                 type="password"
                 name="password"
                 placeholder="password"

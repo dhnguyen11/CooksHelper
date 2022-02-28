@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import { Grid } from "semantic-ui-react";
 import HomeSelect from "../../components/HomeSelect/HomeSelect"
+import "./HomePage.css"
 
 export default function HomePage({ user, handleLogout }) {
     return (
