@@ -17,6 +17,11 @@
     text-align: center;
 }
 
+#home-card-four {
+    padding: 20px;
+    text-align: center;
+}
+
 #home-link-one {
     display: grid;
     font-size: 16px;
@@ -36,6 +41,15 @@
 }
 
 #home-link-three {
+    display: grid;
+    font-size: 16px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3fr 1fr;
+    justify-items: center;
+    row-gap: 15px;
+}
+
+#home-link-four {
     display: grid;
     font-size: 16px;
     grid-template-columns: 1fr;

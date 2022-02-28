@@ -5,7 +5,7 @@ import "./HomeSelect.css"
 
 export default function HomeSelect() {
     return (
-        <Card.Group centered itemsPerRow={3} stackable>
+        <Card.Group centered itemsPerRow={2} stackable>
             <Card id="home-card-one">
                 <Link to="/new" id="home-link-one">
                     <Icon size="huge" name="write" />
@@ -22,6 +22,12 @@ export default function HomeSelect() {
                 <Link to="/search" id="home-link-three">
                     <Icon size="huge" name="search" />
                     Search Recipes
+                </Link>
+            </Card>
+            <Card id="home-card-four">
+                <Link to="/" id="home-link-four">
+                    <Icon size="huge" name="list alternate outline" />
+                    Shopping list
                 </Link>
             </Card>
         </Card.Group>
