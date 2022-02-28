@@ -4,6 +4,7 @@ import { Grid, Button } from "semantic-ui-react";
 import { useParams } from "react-router-dom";
 import * as recipeAPI from "../../utils/recipeApi";
 import * as favoriteAPI from "../../utils/favoriteApi";
+import * as groceryAPI from "../../utils/groceryApi";
 import FavoriteComponent from "../../components/FavoriteComponent/FavoriteComponent";
 import { useNavigate } from "react-router-dom";
 
@@ -75,6 +76,16 @@ export default function RecipeDetails({ user, handleLogout }){
         }
     }
 
+    async function addGroceries() {
+        try {
+            const data = await groceryAPI.addGroceries(recipe._id)
+            navigate("/groceries")
+        } catch(err) {
+            console.log(err.message);
+            setError(err.message);
+        }
+    }
+
 
     if (loading) {
         return (
@@ -104,7 +115,7 @@ export default function RecipeDetails({ user, handleLogout }){
             <Grid.Row>
                 <Grid.Column floated="left" width={1}></Grid.Column>
                 {isOwner 
-                    ? <Grid.Column floated="left" width={2} onClick={deleteRecipe}><Button>Delete</Button></Grid.Column>
+                    ? <Grid.Column floated="left" width={2}><Button onClick={deleteRecipe}>Delete</Button></Grid.Column>
                     : <Grid.Column floated="left" width={2}></Grid.Column>
                 }
                 <Grid.Column width={10}></Grid.Column>
@@ -117,6 +128,9 @@ export default function RecipeDetails({ user, handleLogout }){
             </Grid.Row>
             <Grid.Row>
                 <h3>by {user.username}</h3>
+            </Grid.Row>
+            <Grid.Row>
+                <Button onClick={addGroceries}>Make This!</Button>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column style={{maxWidth: 1000}}>

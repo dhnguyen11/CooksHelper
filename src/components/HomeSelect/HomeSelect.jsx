@@ -25,7 +25,7 @@ export default function HomeSelect() {
                 </Link>
             </Card>
             <Card id="home-card-four">
-                <Link to="/" id="home-link-four">
+                <Link to="/groceries" id="home-link-four">
                     <Icon size="huge" name="list alternate outline" />
                     Shopping list
                 </Link>
