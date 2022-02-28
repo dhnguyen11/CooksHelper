@@ -73,14 +73,19 @@ export default function SearchRecipes ({ user, handleLogout }) {
                     </Form>
                 </Grid.Column>
             </Grid.Row>
-            <Grid.Row>
-                <Grid.Column style={{maxWidth: 1250}}>
-                    <RecipeList 
-                        user={ user }
-                        recipes={ state.recipeSet }
-                    />
-                </Grid.Column>
-            </Grid.Row>
+            
+            {state.recipeSet.length > 0
+                ?
+                <Grid.Row>
+                    <Grid.Column style={{maxWidth: 1250}}>
+                        <RecipeList 
+                            user={ user }
+                            recipes={ state.recipeSet }
+                        />
+                    </Grid.Column>
+                </Grid.Row>
+                :<h1 id="msg4">No Matches Found</h1>
+            }
         </Grid>
     )
 }

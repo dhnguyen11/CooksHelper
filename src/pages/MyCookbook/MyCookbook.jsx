@@ -41,14 +41,19 @@ export default function MyCookbook ({ user, handleLogout }) {
                     <PageHeader user={user} handleLogout={handleLogout} />
                 </Grid.Column>
             </Grid.Row>
-            <Grid.Row>
-                <Grid.Column style={{maxWidth: 1250}}>
-                    <RecipeList 
-                        user={ user }
-                        recipes={ recipes }
-                    />
-                </Grid.Column>
-            </Grid.Row>
+            {recipes.length > 0
+                ?
+                <Grid.Row>
+                    <Grid.Column style={{maxWidth: 1250}}>
+                        <RecipeList 
+                            user={ user }
+                            recipes={ recipes }
+                        />
+                    </Grid.Column>
+                </Grid.Row>
+                :<h1 id="msg3">Your Cookbook is Empty</h1>
+
+            }
         </Grid>
     )
 }
