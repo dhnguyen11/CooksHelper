@@ -28,7 +28,7 @@ export function getGroceries(){
 
 export function emptyGroceries(){
     return fetch(BASE_URL, {
-		method: 'DELETE',
+		method: 'PUT',
 	    headers: {
 			'Authorization': 'Bearer ' + tokenService.getToken() // <- the jwt contains the user who is sending the like
 		}	
