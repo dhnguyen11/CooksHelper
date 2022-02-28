@@ -13,7 +13,7 @@ export default function HomePage({ user, handleLogout }) {
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-                <h1>Cooks' Helper</h1>
+                <h1>Welcome To Cooks' Helper</h1>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column style={{maxWidth: 1250}}>
