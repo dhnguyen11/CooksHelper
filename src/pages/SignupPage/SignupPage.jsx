@@ -12,6 +12,8 @@ import {
   Segment,
 } from "semantic-ui-react";
 
+import "./SignupPage.css"
+
 export default function SignUpPage(props) {
   const [error, setError] = useState("");
   const [state, setState] = useState({
@@ -78,10 +80,11 @@ export default function SignUpPage(props) {
     <>
       <Grid textAlign='center' verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450}}>
-          <Header as="h2" color="black" textAlign="center">Sign Up For An Account</Header>
+          <Header id="main-head" as="h2" color="black" textAlign="center">Sign Up For An Account</Header>
           <Form autoComplete="off" onSubmit={handleSubmit}>
-            <Segment stacked>
+            <Segment>
               <Form.Input
+                style={{ minWidth: 350 }}
                 type="username"
                 name="username"
                 placeholder="username"
@@ -90,6 +93,7 @@ export default function SignUpPage(props) {
                 required
               />
               <Form.Input
+                style={{ minWidth: 350 }}
                 type="email"
                 name="email"
                 placeholder="email"
@@ -98,6 +102,7 @@ export default function SignUpPage(props) {
                 required
               />
               <Form.Input
+                style={{ minWidth: 350 }}
                 type="password"
                 name="password"
                 placeholder="password"
@@ -106,6 +111,7 @@ export default function SignUpPage(props) {
                 required
               />
               <Form.Input
+                style={{ minWidth: 350 }}
                 type="password"
                 name="passwordConf"
                 placeholder="Confirm Password"
@@ -114,6 +120,7 @@ export default function SignUpPage(props) {
                 required
               />
               <Form.TextArea
+                style={{ minWidth: 350 }}
                 label="bio"
                 name="bio"
                 placeholder="Tell us about you!"
@@ -121,6 +128,7 @@ export default function SignUpPage(props) {
               />
               <Form.Field>
                 <Form.Input
+                  style={{ minWidth: 350 }}
                   type="file"
                   name="photo"
                   placeholder="upload image"

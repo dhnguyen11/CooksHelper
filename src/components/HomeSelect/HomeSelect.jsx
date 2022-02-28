@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom"
 import { Card, Icon } from "semantic-ui-react"
+import "./HomeSelect.css"
 
 export default function HomeSelect() {
     return (
         <Card.Group centered itemsPerRow={3} stackable>
-            <Card>
+            <Card id="home-card-one">
                 <Link to="/new">
                     <Icon size="large" name="write"></Icon>
                     Add a Recipe

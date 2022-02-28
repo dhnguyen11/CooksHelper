@@ -21,10 +21,6 @@ export default function RecipeDetails({ user, handleLogout }){
     // Grabbing the param from the browser
     const { recipeId } = useParams();
 
-    useEffect(() => {
-        getRecipe();
-    }, [recipeId])
-    
     async function getRecipe() {
         try {
             const data = await recipeAPI.getOne(recipeId);
@@ -40,6 +36,12 @@ export default function RecipeDetails({ user, handleLogout }){
             setError("Recipe does not exist");
         }
     }
+
+    useEffect(() => {
+        getRecipe();
+    }, [recipeId])
+    
+    
 
     async function addFavorite(recipeId) {
         console.log(recipeId, "recipeId")

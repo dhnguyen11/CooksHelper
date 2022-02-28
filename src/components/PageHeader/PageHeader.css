@@ -1,0 +1,19 @@
+#page-header {
+    background-color:#a300009c;
+}
+
+#header-one {
+    color: white
+}
+
+#header-two {
+    color: white
+}
+
+#header-one:hover {
+    color: rgb(211, 211, 211)
+}
+
+#header-two:hover {
+    color: rgb(211, 211, 211)
+}
