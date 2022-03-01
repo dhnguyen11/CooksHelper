@@ -92,6 +92,7 @@ export default function GroceryList({ user, handleLogout }){
             <Grid.Row>
                 <Button onClick={deleteGroceries}>Clear Grocery List</Button>
             </Grid.Row>
+            <Grid.Row ><p id="recipe-grid"> </p></Grid.Row>
         </Grid>
     )
 }

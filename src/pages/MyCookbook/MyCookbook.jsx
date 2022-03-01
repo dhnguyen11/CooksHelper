@@ -54,6 +54,7 @@ export default function MyCookbook ({ user, handleLogout }) {
                 :<h1 id="msg3">Your Cookbook is Empty</h1>
 
             }
+            <Grid.Row ><p id="recipe-grid"> </p></Grid.Row>
         </Grid>
     )
 }

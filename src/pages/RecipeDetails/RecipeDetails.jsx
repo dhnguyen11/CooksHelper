@@ -7,6 +7,7 @@ import * as favoriteAPI from "../../utils/favoriteApi";
 import * as groceryAPI from "../../utils/groceryApi";
 import FavoriteComponent from "../../components/FavoriteComponent/FavoriteComponent";
 import { useNavigate } from "react-router-dom";
+import "./RecipeDetails.css"
 
 
 export default function RecipeDetails({ user, handleLogout }){
@@ -183,6 +184,7 @@ export default function RecipeDetails({ user, handleLogout }){
                     )
                 })
             }
+            <Grid.Row ><p id="recipe-grid"> </p></Grid.Row>
         </Grid>
     )
 }

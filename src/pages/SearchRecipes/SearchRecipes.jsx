@@ -86,6 +86,7 @@ export default function SearchRecipes ({ user, handleLogout }) {
                 </Grid.Row>
                 :<h1 id="msg4">No Matches Found</h1>
             }
+            <Grid.Row ><p id="recipe-grid"> </p></Grid.Row>
         </Grid>
     )
 }
