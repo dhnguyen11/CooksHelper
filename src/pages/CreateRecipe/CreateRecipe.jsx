@@ -12,7 +12,9 @@ export default function CreateRecipe({ user, handleLogout }) {
     const [state, setState] = useState({
         name: "",
         ingredients: [""],
-        instructions: [""]
+        instructions: [""],
+        glutenFree: false,
+        vegan: false
     });
 
     async function handleSubmit(e) {
@@ -66,6 +68,7 @@ export default function CreateRecipe({ user, handleLogout }) {
             })
         }
         else {
+            console.log(e.target.name)
             setState({
                 ...state,
                 [e.target.name]: e.target.value
@@ -89,6 +92,23 @@ export default function CreateRecipe({ user, handleLogout }) {
         })
     }
 
+    function toggleGluten(e) {
+        e.preventDefault()
+            setState({
+                ...state,
+                glutenFree: !state.glutenFree
+            })
+        
+    }
+
+    function toggleVegan(e) {
+        e.preventDefault()
+            setState({
+                ...state,
+                vegan: !state.vegan
+            })
+        
+    }
 
     return (
         <Grid textAlign="center" verticalAlign="middle">
@@ -175,6 +195,10 @@ export default function CreateRecipe({ user, handleLogout }) {
                                     >
                                         Add Instruction
                                     </Button>
+                                </Grid.Row>
+                                <Grid.Row>
+                                    <Form.Checkbox label="Vegan Friendly" name="vegan" onChange={toggleVegan}/>
+                                    <Form.Checkbox label="Gluten Free" name="glutenFree" onClick={toggleGluten}/>
                                 </Grid.Row>
                                 <Grid.Row>
                                     <Button 

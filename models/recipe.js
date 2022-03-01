@@ -10,7 +10,9 @@ const recipeSchema = mongoose.Schema({
     name: String,
     ingredients: [String],
     instructions: [String],
-    favorites: [favoriteSchema] // <- 1:M relationship with favorites
+    favorites: [favoriteSchema], // <- 1:M relationship with favorites
+    glutenFree: Boolean,
+    vegan: Boolean,
 })
 
 module.exports = mongoose.model('Recipe', recipeSchema)

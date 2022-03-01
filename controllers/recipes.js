@@ -10,6 +10,7 @@ module.exports = {
 
 // Function to create a recipe
 async function create(req, res) {
+    console.log(req.body)
     try {
         // Attempts to create the recipe using the req.body values
         // Additionally adds the user
@@ -17,7 +18,9 @@ async function create(req, res) {
             user: req.user,
             name: req.body.name,
             ingredients: req.body.ingredients,
-            instructions: req.body.instructions
+            instructions: req.body.instructions,
+            glutenFree: req.body.glutenFree,
+            vegan: req.body.vegan
         })
         // Populates the user to allow use of username
         recipe = await recipe.populate('user')
