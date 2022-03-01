@@ -40,7 +40,7 @@ Deployed with Heroku
 
 ## Getting Started
 Link to app:
-coming soon!
+https://cookshelper.herokuapp.com/
 
 Link to Trello board:
 https://trello.com/b/9Klvalce/ga-capstone
