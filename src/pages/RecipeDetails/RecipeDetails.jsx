@@ -129,6 +129,18 @@ export default function RecipeDetails({ user, handleLogout }){
             <Grid.Row>
                 <h3>by {user.username}</h3>
             </Grid.Row>
+            { recipe.glutenFree
+                ? <Grid.Row>
+                    <h3>Gluten Free</h3>
+                </Grid.Row>
+                : <></>
+            }
+            { recipe.vegan
+                ? <Grid.Row>
+                    <h3>Vegan-Friendly</h3>
+                </Grid.Row>
+                : <></>
+            }
             <Grid.Row>
                 <Button onClick={addGroceries}>Make This!</Button>
             </Grid.Row>
