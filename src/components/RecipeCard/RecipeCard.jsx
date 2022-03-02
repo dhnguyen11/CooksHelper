@@ -18,7 +18,7 @@ export default function RecipeCard({ recipe, user }) {
                             <Icon fitted name="pagelines" color="brown" />
                             <Icon name='dont' color="red" size="large"></Icon>
                           </Icon.Group>}></Popup>
-                        : <Popup content="gluten-free" trigger={<Icon.Group size="large" id="gluten-symbol">
+                        : <Popup content="not gluten-free" trigger={<Icon.Group size="large" id="gluten-symbol">
                             <Icon disabled fitted name="pagelines" color="grey" />
                             <Icon disabled name='dont' color="grey" size="large"></Icon>
                           </Icon.Group>}></Popup>
