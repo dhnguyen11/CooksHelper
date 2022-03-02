@@ -127,6 +127,7 @@ export default function SignUpPage(props) {
                 onChange={handleChange}
               />
               <Form.Field>
+                <p>Upload a Profile Photo</p>
                 <Form.Input
                   style={{ minWidth: 350 }}
                   type="file"
