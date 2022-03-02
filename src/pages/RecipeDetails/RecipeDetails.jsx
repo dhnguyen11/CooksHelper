@@ -128,7 +128,7 @@ export default function RecipeDetails({ user, handleLogout }){
                 <h1>{ recipe.name }</h1>
             </Grid.Row>
             <Grid.Row>
-                <h3>by {user.username}</h3>
+                <h3>by {recipe.user.username}</h3>
             </Grid.Row>
             { recipe.glutenFree
                 ? <Grid.Row>
